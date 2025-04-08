@@ -22,51 +22,33 @@ data <- readRDS(
 Count the total number of people who died of different diseases in each age group (add together men and women in the same age group).
 
 #### Data Clean; Counting the number of death in different age groups.
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
-library(dplyr)
-
-df_combined <- data %>%
-  group_by(AgeGroup) %>%
-  summarise(across(where(is.numeric), sum, na.rm = TRUE))
-
-df_new <- df_combined[, !names(df_combined) %in% c("Date_Of_Death_Year", "Date_Of_Death_Month")]
-
+```{r, plot-data-1, echo = FALSE, warning = FALSE, message = FALSE}
+#| fig.align = "center",
+#| out.width = "600px"
+knitr::include_graphics(
+  here::here("output/plot1.png")
+)
 ```
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
-library(ggplot2)
-
-ggplot(df_new, aes(x = AgeGroup, y = COVID19)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Death due to COVID-19 Relate to Different Age Group",
-       x = "Age Group",
-       y = "COVID-19 Death Number") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-```{r, echo = FALSE, warning = FALSE, message = FALSE}
-ggplot(df_new, aes(x = AgeGroup, y = Diabetes.uc)) +
-  geom_bar(stat = "identity", fill = "red") +
-  labs(title = "Death due to diabetes Relate to Different Age Group",
-       x = "Age Group",
-       y = "Diabetes Death Number") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```{r, plot-data-2, echo = FALSE, warning = FALSE, message = FALSE}
+#| fig.align = "center",
+#| out.width = "600px"
+knitr::include_graphics(
+  here::here("output/plot2.png")
+)
 ```
 
 Generates a table showing descriptive statistics of COVID-19 and diabetes mortality data in different age groups, including overall statistics and p-values for comparisons between groups.
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
+# Load the required library for table formatting
 library(gtsummary)
 
-table_one <- df_new |>
-  select("AgeGroup", "COVID19", "Diabetes.uc") |>
-  tbl_summary(by = AgeGroup) |>
-  modify_spanning_header(c("stat_1", "stat_2") ~ "**Death rank in COVID19 and Diabetes**") |>
-  add_overall() |>
-  add_p()
+# Load the gtsummary table from the RDS file. 
+# Make sure that the file path below correctly points to your saved "table_one.rds" file.
+table_one <- readRDS("output/table_one.rds")
 
+# Print the table in the R Markdown report
 table_one
 
 ```
