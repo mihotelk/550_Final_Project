@@ -24,5 +24,13 @@ This script creates another plot, such as plot2.png, or additional tables for th
 4. Run code/04_render_rmd.R
 This script renders the final R Markdown file (Final_project.Rmd) into an HTML document.(output:  Final_project.html).
 
+## Setting Up the Project Environment
+
+To restore the required R packages for this project, run:
+
+```bash
+make install
+```
+
 ## Quick Guide for generating the final report
 Just run make in the terminal!

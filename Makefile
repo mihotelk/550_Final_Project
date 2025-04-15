@@ -12,6 +12,9 @@ output/plot2.png: code/03_make_table_2.R output/data_clean.rds
 
 output/table_one.rds: code/01_make_report.R output/data_clean.rds
 	Rscript code/01_make_report.R
+	
+install:
+	Rscript -e "renv::restore()"
 
 .PHONY: clean
 clean:
