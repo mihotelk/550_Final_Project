@@ -36,6 +36,10 @@ make install
 
 To create the final report by using docker image
 
+The link of image from Docker hub:
+
+https://hub.docker.com/repository/docker/mihotelk/550_final_project/general
+
 Firstly, create the image:
 ```
 bash
