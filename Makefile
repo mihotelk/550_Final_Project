@@ -18,17 +18,13 @@ install:
 
 .PHONY: clean
 clean:
-	rm -f output/*.rds && rm -f output/*.png && rm -f *.html
+	rm -f output/*.rds && rm -f output/*.png && rm -f *.html && final_report/*.html
 
-# Docker-associated rules (run on our local machine)
-PROJECTFILES = report.Rmd code/01_make_output.R code/02_render_report.R Makefile
-RENVFILES = renv.lock renv/activate.R renv/settings.json
 
 # rule to build image
-project_image: Dockerfile $(PROJECTFILES) $(RENVFILES)
-	docker build -t project_image .
-	touch $@
+project_image: Dockerfile
+	docker build -t mihotelk/550_final_project .
 
 # rule to build the report automatically in our container
-final_report/report.html: project_image
-	docker run -v "$$(pwd)/final_report":/project/final_report project_image
+final_report/Final_report.html: 
+	docker run -v "$$(pwd)/final_report":/project/final_report mihotelk/550_final_project

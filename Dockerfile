@@ -7,9 +7,11 @@ WORKDIR /project
 
 RUN mkdir code
 RUN mkdir output
+RUN mkdir data
 COPY code code
 COPY Makefile .
 COPY Final_project.Rmd .
+COPY data data
 
 COPY .Rprofile .
 COPY renv.lock .

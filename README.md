@@ -32,5 +32,20 @@ To restore the required R packages for this project, run:
 make install
 ```
 
+## Using Dockerfile to create the final report
+
+To create the final report by using docker image
+
+Firstly, create the image:
+```
+bash
+make project_image
+```
+
+Secondly, create the report:
+```bash
+make final_report/Final_report.html
+```
+
 ## Quick Guide for generating the final report
 Just run make in the terminal!
